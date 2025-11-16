@@ -1,4 +1,5 @@
 🍰 Sistema de Gestão da Lanchonete e Bolaria SÁBORES
+
 💡 Por que criar esse sistema?
 A ideia surgiu quando percebi o tempo que eu perdia registrando vendas e produtos manualmente em planilhas enquanto trabalhava em um comércio. Um sistema web simples pode facilitar esse processo, permitindo o cadastro de produtos, registro de vendas e geração de relatórios automáticos — tudo de forma organizada e acessível.
 
