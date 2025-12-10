@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Produto, Categoria
-from .forms import ProdutoForm, CategoriaForm
+from .forms import ProdutoForm
 
 #views produtos
 def listar_produtos(request):
