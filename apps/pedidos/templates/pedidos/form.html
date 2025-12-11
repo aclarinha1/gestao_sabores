@@ -1,0 +1,19 @@
+<h2>Criar Pedido</h2>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+
+  <h3>Itens do Pedido</h3>
+  {{ formset.management_form }}
+  <table>
+    {% for form_item in formset %}
+      <tr>
+        <td>{{ form_item.produto }}</td>
+        <td>{{ form_item.quantidade }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+
+  <button type="submit">Salvar Pedido</button>
+</form>
+<a href="{% url 'pedidos:listar' %}">Voltar</a>

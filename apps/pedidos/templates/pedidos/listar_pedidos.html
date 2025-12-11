@@ -1,0 +1,15 @@
+<h2>Lista de Pedidos</h2>
+<ul>
+  {% for pedido in pedidos %}
+    <li>
+      Pedido #{{ pedido.id }} - {{ pedido.cliente }}  
+      Valor total: R$ {{ pedido.valor_total }}  
+      <a href="{% url 'pedidos:detalhar' pedido.id %}">Detalhar</a> |
+      <a href="{% url 'pedidos:editar' pedido.id %}">Editar</a> |
+      <a href="{% url 'pedidos:deletar' pedido.id %}">Deletar</a>
+    </li>
+  {% empty %}
+    <li>Nenhum pedido cadastrado.</li>
+  {% endfor %}
+</ul>
+<a href="{% url 'pedidos:criar' %}">Criar novo pedido</a>

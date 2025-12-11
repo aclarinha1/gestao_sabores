@@ -1,1 +1,10 @@
-<h1>LISTAR CATEGORIA</h1>
+<h2>Lista de Categorias</h2>
+<ul>
+  {% for categoria in categoria %}
+    <li>{{ categoria.nome_categoria }}</li>
+  {% empty %}
+    <li>Nenhuma categoria cadastrada.</li>
+  {% endfor %}
+</ul>
+
+<a href="{% url 'categoria:criar' %}">Criar nova categoria</a>

@@ -1,0 +1,25 @@
+<h2>Editar Pedido #{{ pedido.id }}</h2>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+
+  <h3>Itens do Pedido</h3>
+  {{ formset.management_form }}
+  <table>
+    {% for form_item in formset %}
+      <tr>
+        <td>{{ form_item.produto }}</td>
+        <td>{{ form_item.quantidade }}</td>
+         <td>
+          {% if form_item.instance.pk %}
+            {{ form_item.DELETE }} Remover
+          {% endif %}
+        </td>
+
+      </tr>
+    {% endfor %}
+  </table>
+
+  <button type="submit">Atualizar Pedido</button>
+</form>
+<a href="{% url 'pedidos:listar' %}">Voltar</a>

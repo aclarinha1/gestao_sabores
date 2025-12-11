@@ -1,1 +1,14 @@
-<h1>LISTAR</h1>
+<h2>Lista de Produtos</h2>
+<ul>
+  {% for produto in produtos %}
+    <li>
+      {{ produto.nome_produto }} - R$ {{ produto.preco_unitario }}
+      {% if produto.categoria %}
+        (Categoria: {{ produto.categoria.nome_categoria }})
+      {% endif %}
+    </li>
+  {% empty %}
+    <li>Nenhum produto cadastrado.</li>
+  {% endfor %}
+</ul>
+<a href="{% url 'produtos:criar' %}">Criar novo produto</a>
