@@ -5,7 +5,7 @@ from apps.produtos.models import Produto
 
 class Pedido(models.Model):
     data_hora = models.DateTimeField(auto_now_add=True)
-    valor_total = models.DecimalField(max_digits=4, decimal_places=2, default=0)
+    valor_total = models.DecimalField(max_digits=8, decimal_places=2, default=0)
     forma_pagamento = models.CharField(max_length=50)
     e_encomenda = models.BooleanField(default=False)
     #quem sabe colocar um atributo e_fiado, do tipo booleano, afinal, fiado não é tipo de pagamento
@@ -24,8 +24,8 @@ class Pedido(models.Model):
 class ItemPedido(models.Model):
     pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE, related_name='itens')
     produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
-    quantidade = models.DecimalField(max_digits=3, decimal_places=2)
-    subtotal = models.DecimalField(max_digits=4, decimal_places=2, null=True, blank=True)
+    quantidade = models.DecimalField(max_digits=8, decimal_places=2)
+    subtotal = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True)
 
     def save(self, *args, **kwargs):
         self.subtotal = self.quantidade * self.produto.preco_unitario

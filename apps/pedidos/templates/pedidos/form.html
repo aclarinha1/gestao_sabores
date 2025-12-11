@@ -1,19 +1,92 @@
-<h2>Criar Pedido</h2>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-
-  <h3>Itens do Pedido</h3>
-  {{ formset.management_form }}
-  <table>
-    {% for form_item in formset %}
-      <tr>
-        <td>{{ form_item.produto }}</td>
-        <td>{{ form_item.quantidade }}</td>
-      </tr>
-    {% endfor %}
-  </table>
-
-  <button type="submit">Salvar Pedido</button>
-</form>
-<a href="{% url 'pedidos:listar' %}">Voltar</a>
+<!-- pedidos/criar_pedido_simples.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Criar Pedido</title>
+    <style>
+        .item-form {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px 0;
+            background: #f9f9f9;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Criar Novo Pedido</h1>
+    
+    <form method="post">
+        {% csrf_token %}
+        
+        <!-- Informações do Pedido -->
+        <h2>Informações do Pedido</h2>
+        {{ form.as_p }}
+        
+        <!-- Itens do Pedido -->
+        <h2>Itens do Pedido</h2>
+        {{ formset.management_form }}
+        
+        <div id="items-container">
+            {% for form_item in formset %}
+                <div class="item-form">
+                    {{ form_item.id }}
+                    <div>
+                        <label>Produto: {{ form_item.produto }}</label>
+                    </div>
+                    <div>
+                        <label>Quantidade: {{ form_item.quantidade }}</label>
+                    </div>
+                    {% if formset.can_delete %}
+                        <div>
+                            {{ form_item.DELETE }} Remover este item
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+        
+        <!-- Botão simples para adicionar via JavaScript básico -->
+        <button type="button" id="add-more">➕ Adicionar Mais Itens</button>
+        
+        <br><br>
+        <button type="submit">Salvar Pedido</button>
+        <a href="{% url 'pedidos:listar' %}">Cancelar</a>
+    </form>
+    
+    <script>
+        // JavaScript SIMPLES para clonar o último form
+        document.getElementById('add-more').addEventListener('click', function() {
+            // Pega o container de itens
+            const container = document.getElementById('items-container');
+            
+            // Pega todos os forms existentes
+            const forms = container.querySelectorAll('.item-form');
+            const lastForm = forms[forms.length - 1];
+            
+            // Clona o último form
+            const newForm = lastForm.cloneNode(true);
+            
+            // Limpa os valores
+            newForm.querySelectorAll('input, select').forEach(input => {
+                if (input.type !== 'hidden' && !input.name.includes('DELETE')) {
+                    if (input.tagName === 'SELECT') {
+                        input.selectedIndex = 0;
+                    } else {
+                        input.value = '';
+                    }
+                }
+            });
+            
+            // Adiciona ao container
+            container.appendChild(newForm);
+            
+            // Atualiza o TOTAL_FORMS do management form
+            const totalForms = document.getElementById('id_form-TOTAL_FORMS');
+            totalForms.value = parseInt(totalForms.value) + 1;
+        });
+    </script>
+</body>
+</html>

@@ -9,7 +9,7 @@ class Categoria(models.Model):
     
 class Produto(models.Model):
     nome_produto = models.CharField(max_length=100)
-    preco_unitario = models.DecimalField(max_digits=4, decimal_places=2)
+    preco_unitario = models.DecimalField(max_digits=6, decimal_places=2)
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, related_name='produtos')
     def __str__(self):
         return self.nome_produto

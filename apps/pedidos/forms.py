@@ -15,13 +15,14 @@ class ItemPedidoForm(forms.ModelForm):
 ItemPedidoFormSetCreate = inlineformset_factory(
     Pedido, ItemPedido,
     form=ItemPedidoForm,
-    extra=1,  # quantos formulários vazios aparecem
-    can_delete=True
+    extra=3,  # quantos formulários vazios aparecem
+    can_delete=True,
+    max_num = 20
 )
 
 ItemPedidoFormSetEdit = inlineformset_factory(
     Pedido, ItemPedido,
     form=ItemPedidoForm,
-    extra=0,  # quantos formulários vazios aparecem
+    extra=1,  # quantos formulários vazios aparecem
     can_delete=True
 )
