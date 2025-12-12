@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Relatórios</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ddd; padding: 10px; }
+        th { background: #f2f2f2; }
+        .total { font-weight: bold; }
+        .periodo { background: #e9ecef; }
+    </style>
+</head>
+<body>
+    <h1>📊 Relatórios</h1>
+    <a href="/">← Voltar</a>
+    
+    <h2>Resumo Financeiro</h2>
+    <table>
+        <tr class="periodo">
+            <td>Hoje ({{ hoje }})</td>
+            <td class="total">R$ {{ total_hoje }}</td>
+        </tr>
+        <tr>
+            <td>Esta Semana</td>
+            <td class="total">R$ {{ total_semana }}</td>
+        </tr>
+        <tr class="periodo">
+            <td>Mês Atual ({{ mes_atual }}/{{ ano_atual }})</td>
+            <td class="total">R$ {{ total_mes }}</td>
+        </tr>
+        <tr>
+            <td>Ano Atual ({{ ano_atual }})</td>
+            <td class="total">R$ {{ total_ano }}</td>
+        </tr>
+    </table>
+    
+    <h2>Mais Vendidos (Mês Atual)</h2>
+    <table>
+        <tr>
+            <th>Categoria Mais Vendida</th>
+            <td>{{ categoria_mais_vendida }}</td>
+        </tr>
+        <tr>
+            <th>Produto Mais Vendido</th>
+            <td>{{ produto_mais_vendido }}</td>
+        </tr>
+    </table>
+    
+</body>
+</html>
