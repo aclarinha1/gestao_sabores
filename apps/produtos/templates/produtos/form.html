@@ -1,6 +1,7 @@
-<h2>Criar Produto</h2>
+<h2>{{ acao }} Produto</h2>
 <form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Salvar Produto</button>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Salvar</button>
 </form>
+<a href="{% url 'produtos:listar' %}">Cancelar</a>

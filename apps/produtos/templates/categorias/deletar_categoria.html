@@ -1,1 +1,8 @@
-<h1>DELETAR CATEGORIA</h1>
+<h2>Excluir Categoria</h2>
+<p>Tem certeza que deseja excluir "{{ categoria.nome_categoria }}"?</p>
+<p>Produtos afetados: {{ categoria.produtos.count }}</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Sim, excluir</button>
+</form>
+<a href="{% url 'categoria:listar' %}">Cancelar</a>

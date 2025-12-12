@@ -1,1 +1,10 @@
-<h1>DETALHAR CATEGORIA</h1>
+<h2>{{ categoria.nome_categoria }}</h2>
+<p>{{ categoria.descricao|default:"Sem descrição" }}</p>
+<h3>Produtos nesta categoria ({{ categoria.produtos.count }}):</h3>
+<ul>
+    {% for p in categoria.produtos.all %}
+    <li>{{ p.nome_produto }} - R$ {{ p.preco_unitario }}</li>
+    {% endfor %}
+</ul>
+<a href="{% url 'categoria:editar' categoria.id %}">Editar</a>
+<a href="{% url 'categoria:listar' %}">Voltar</a>

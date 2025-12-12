@@ -1,6 +1,7 @@
-<h2>Criar Categoria</h2>
+<h2>{{ acao }} Categoria</h2>
 <form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Salvar Categoria</button>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Salvar</button>
 </form>
+<a href="{% url 'categoria:listar' %}">Cancelar</a>

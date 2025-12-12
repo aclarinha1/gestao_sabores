@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Editar Produto</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        .form-container { max-width: 500px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input, select { width: 100%; padding: 8px; border: 1px solid #ddd; }
+        .btn { padding: 10px 15px; border: none; cursor: pointer; }
+        .btn-primary { background: #007bff; color: white; }
+        .btn-secondary { background: #6c757d; color: white; }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>✏️ Editar Produto</h1>
+        
+        <form method="post">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="id_nome_produto">Nome do Produto:</label>
+                {{ form.nome_produto }}
+            </div>
+            
+            <div class="form-group">
+                <label for="id_preco_unitario">Preço Unitário:</label>
+                {{ form.preco_unitario }}
+                <small>Ex: 29.99</small>
+            </div>
+            
+            <div class="form-group">
+                <label for="id_categoria">Categoria:</label>
+                {{ form.categoria }}
+            </div>
+            
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">💾 Atualizar Produto</button>
+                <a href="{% url 'produtos:listar' %}" class="btn btn-secondary">↩️ Cancelar</a>
+                <a href="{% url 'produtos:detalhar' form.instance.pk %}" class="btn">👁️ Ver Detalhes</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

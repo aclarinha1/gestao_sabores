@@ -1,10 +1,17 @@
-<h2>Lista de Categorias</h2>
-<ul>
-  {% for categoria in categoria %}
-    <li>{{ categoria.nome_categoria }}</li>
-  {% empty %}
-    <li>Nenhuma categoria cadastrada.</li>
-  {% endfor %}
-</ul>
-
-<a href="{% url 'categoria:criar' %}">Criar nova categoria</a>
+<h2>Categorias</h2>
+<a href="{% url 'categoria:criar' %}">+ Nova</a>
+<table border="1">
+    <tr><th>Nome</th><th>Descrição</th><th>Produtos</th><th>Ações</th></tr>
+    {% for c in categoria %}
+    <tr>
+        <td>{{ c.nome_categoria }}</td>
+        <td>{{ c.descricao|default:"-" }}</td>
+        <td>{{ c.produtos.count }}</td>
+        <td>
+            <a href="{% url 'categoria:detalhar' c.id %}">Ver</a>
+            <a href="{% url 'categoria:editar' c.id %}">Editar</a>
+            <a href="{% url 'categoria:deletar' c.id %}">Excluir</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>

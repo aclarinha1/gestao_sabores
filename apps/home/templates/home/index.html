@@ -1,6 +1,13 @@
-{% block title %}Página Inicial{% endblock %}
-
-{% block content %}
-  <h1>Bem-vindo à Lanchonete!</h1>
-  <p>Escolha uma opção no menu acima.</p>
-{% endblock %}
+<!DOCTYPE html>
+<html>
+<head><title>Home</title></head>
+<body>
+<h1>Sistema de Pedidos</h1>
+<ul>
+    <li><a href="{% url 'pedidos:listar' %}">Pedidos</a></li>
+    <li><a href="{% url 'produtos:listar' %}">Produtos</a></li>
+    <li><a href="{% url 'categoria:listar' %}">Categorias</a></li>
+</ul>
+<a href="{% url 'pedidos:criar' %}">+ Novo Pedido</a>
+</body>
+</html>

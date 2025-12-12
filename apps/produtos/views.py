@@ -30,7 +30,7 @@ def editar_produto(request, pk):
             return redirect('produtos:listar')
     else:
         form = ProdutoForm(instance=produto)
-    return render(request, 'produtos/form.html', {'form': form, 'acao':'Editar'})
+    return render(request, 'produtos/editar_produto.html', {'form': form, 'acao':'Editar'})
 
 def deletar_produto(request, pk):
     produto = get_object_or_404(Produto, pk=pk)
@@ -47,7 +47,7 @@ def listar_categoria(request):
     return render(request, 'categorias/listar_categoria.html', {'categoria': categoria})
 
 def detalhar_categoria(request, pk):
-    categoria = get_object_or_404(Produto, pk=pk)
+    categoria = get_object_or_404(Categoria, pk=pk)
     return render(request, 'categorias/detalhar_categoria.html', {'categoria': categoria})
 
 def criar_categoria(request):
@@ -69,7 +69,7 @@ def editar_categoria(request, pk):
             return redirect('categoria:listar')
     else:
         form = CategoriaForm(instance=categoria)
-    return render(request, 'categorias/form.html', {'form': form, 'acao':'Editar'})
+    return render(request, 'categorias/editar_categoria.html', {'form': form, 'acao':'Editar'})
 
 def deletar_categoria(request, pk):
     categoria = get_object_or_404(Categoria, pk=pk)

@@ -1,1 +1,7 @@
-<h1>DELETAR</h1>
+<h2>Excluir Produto</h2>
+<p>Tem certeza que deseja excluir "{{ produto.nome_produto }}"?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Sim, excluir</button>
+</form>
+<a href="{% url 'produtos:listar' %}">Cancelar</a>

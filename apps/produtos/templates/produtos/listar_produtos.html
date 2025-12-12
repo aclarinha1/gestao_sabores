@@ -1,14 +1,17 @@
-<h2>Lista de Produtos</h2>
-<ul>
-  {% for produto in produtos %}
-    <li>
-      {{ produto.nome_produto }} - R$ {{ produto.preco_unitario }}
-      {% if produto.categoria %}
-        (Categoria: {{ produto.categoria.nome_categoria }})
-      {% endif %}
-    </li>
-  {% empty %}
-    <li>Nenhum produto cadastrado.</li>
-  {% endfor %}
-</ul>
-<a href="{% url 'produtos:criar' %}">Criar novo produto</a>
+<h2>Produtos</h2>
+<a href="{% url 'produtos:criar' %}">+ Novo</a>
+<table border="1">
+    <tr><th>Nome</th><th>Preço</th><th>Categoria</th><th>Ações</th></tr>
+    {% for p in produtos %}
+    <tr>
+        <td>{{ p.nome_produto }}</td>
+        <td>R$ {{ p.preco_unitario }}</td>
+        <td>{{ p.categoria.nome_categoria }}</td>
+        <td>
+            <a href="{% url 'produtos:detalhar' p.id %}">Ver</a>
+            <a href="{% url 'produtos:editar' p.id %}">Editar</a>
+            <a href="{% url 'produtos:deletar' p.id %}">Excluir</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
