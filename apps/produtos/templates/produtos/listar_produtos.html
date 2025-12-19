@@ -1,17 +1,31 @@
-<h2>Produtos</h2>
-<a href="{% url 'produtos:criar' %}">+ Novo</a>
-<table border="1">
-    <tr><th>Nome</th><th>Preço</th><th>Categoria</th><th>Ações</th></tr>
-    {% for p in produtos %}
-    <tr>
-        <td>{{ p.nome_produto }}</td>
-        <td>R$ {{ p.preco_unitario }}</td>
-        <td>{{ p.categoria.nome_categoria }}</td>
-        <td>
-            <a href="{% url 'produtos:detalhar' p.id %}">Ver</a>
-            <a href="{% url 'produtos:editar' p.id %}">Editar</a>
-            <a href="{% url 'produtos:deletar' p.id %}">Excluir</a>
-        </td>
-    </tr>
-    {% endfor %}
-</table>
+{% extends 'base.html' %}
+{%load static%}
+{%block content%}
+
+    <h1>Produtos</h1>
+    <div style="text-align: right; margin: 0 20px 15px 0;">
+        <a class="btn btn-success" href="{% url 'produtos:criar' %}" role="button">
+            + Nova Produto
+        </a>
+    </div>
+<div class="card">
+    <div class="card-body">
+        <table>
+            <tr><th>Nome</th><th>Preço</th><th>Categoria</th><th>Ações</th></tr>
+                {% for p in produtos %}
+            <tr>
+                <td>{{ p.nome_produto }}</td>
+                <td>R$ {{ p.preco_unitario }}</td>
+                <td>{{ p.categoria.nome_categoria }}</td>
+                        <td>
+                            <a class="btn btn-primary" href="{% url 'produtos:detalhar' p.id %}" role="button">Ver</a>
+                            <a class="btn btn-warning" href="{% url 'produtos:editar' p.id %}" role="button">Editar</a>
+                            <a class="btn btn-danger" href="{% url 'produtos:deletar' p.id %}" role="button">Excluir</a>
+                        </td>
+            </tr>
+                {% endfor %}
+        </table>
+    </div>
+</div>
+{%endblock%}
+    

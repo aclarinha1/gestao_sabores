@@ -1,12 +1,17 @@
-<h2>Confirmar Exclusão</h2>
-<p>Tem certeza que deseja excluir o Pedido #{{ pedido.id }}?</p>
-<p><strong>Cliente:</strong> {{ pedido.cliente|default:"Não informado" }}</p>
-<p><strong>Valor Total:</strong> R$ {{ pedido.valor_total }}</p>
-<p><strong>Data:</strong> {{ pedido.data_hora|date:"d/m/Y H:i" }}</p>
+{% extends 'base.html' %}
+{%load static%}
+{%block content%}
+  <main>
+    <h1>Confirmar Exclusão</h1>
+    <p>Tem certeza que deseja excluir o Pedido #{{ pedido.id }}?</p>
+    <p><strong>Cliente:</strong> {{ pedido.cliente|default:"Não informado" }}</p>
+    <p><strong>Valor Total:</strong> R$ {{ pedido.valor_total }}</p>
+    <p><strong>Data:</strong> {{ pedido.data_hora|date:"d/m/Y H:i" }}</p>
 
-<form method="post">
-  {% csrf_token %}
-  <button type="submit" class="btn btn-danger">Sim, excluir</button>
-  <a href="{% url 'pedidos:listar' %}" class="btn btn-secondary">Cancelar</a>
-  <a href="{% url 'pedidos:detalhar' pedido.id %}" class="btn btn-info">Ver Detalhes</a>
-</form>
+    <form method="post">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger">Sim, excluir</button>
+      <a href="{% url 'pedidos:listar' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+  </main>
+{%endblock%}

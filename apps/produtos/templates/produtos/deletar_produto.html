@@ -1,7 +1,13 @@
-<h2>Excluir Produto</h2>
-<p>Tem certeza que deseja excluir "{{ produto.nome_produto }}"?</p>
-<form method="post">
-    {% csrf_token %}
-    <button type="submit">Sim, excluir</button>
-</form>
-<a href="{% url 'produtos:listar' %}">Cancelar</a>
+{% extends 'base.html' %}
+{%load static%}
+{%block content%}
+    <h1>Excluir Produto</h1>
+    <p>Tem certeza que deseja excluir <strong>{{ produto.nome_produto }}</strong>?</p>
+        <p><strong>ID:</strong> {{ produto.id }}</p>
+    <p><strong>Preço:</strong> {{ produto.preco_unitario }}</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Sim, excluir</button>
+        <a href="{% url 'produtos:listar' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+{%endblock%}

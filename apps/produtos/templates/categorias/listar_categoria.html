@@ -1,17 +1,32 @@
-<h2>Categorias</h2>
-<a href="{% url 'categoria:criar' %}">+ Nova</a>
-<table border="1">
-    <tr><th>Nome</th><th>Descrição</th><th>Produtos</th><th>Ações</th></tr>
-    {% for c in categoria %}
-    <tr>
-        <td>{{ c.nome_categoria }}</td>
-        <td>{{ c.descricao|default:"-" }}</td>
-        <td>{{ c.produtos.count }}</td>
-        <td>
-            <a href="{% url 'categoria:detalhar' c.id %}">Ver</a>
-            <a href="{% url 'categoria:editar' c.id %}">Editar</a>
-            <a href="{% url 'categoria:deletar' c.id %}">Excluir</a>
-        </td>
-    </tr>
-    {% endfor %}
-</table>
+{% extends 'base.html' %}
+{%load static%}
+{%block content%}
+    
+<h1>Categorias</h1>
+    <div style="text-align: right; margin: 0 20px 15px 0;">
+        <a class="btn btn-success" href="{% url 'categoria:criar' %}" role="button">
+            + Nova Categoria
+        </a>
+    </div>
+
+        <div class="card">
+            <div class="card-body">
+                <table>
+                <tr><th>Nome</th><th>Produtos</th><th>Descrição</th><th>Ações</th></tr>
+                    {% for c in categoria %}
+                    <tr>
+                        <td>{{ c.nome_categoria }}</td>
+                        <td>{{ c.produtos.count }}</td>
+                        <td>{{ c.descricao|default:"Sem descrição"}}</td>
+                        <td>
+                            <a class="btn btn-primary" href="{% url 'categoria:detalhar' c.id %}" role="button">Ver</a>
+                            <a class="btn btn-warning" href="{% url 'categoria:editar' c.id %}" role="button">Editar</a>
+                            <a class="btn btn-danger" href="{% url 'categoria:deletar' c.id %}" role="button">Excluir</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+        
+{%endblock%}

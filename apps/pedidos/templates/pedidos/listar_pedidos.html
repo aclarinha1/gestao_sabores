@@ -1,15 +1,36 @@
-<h2>Lista de Pedidos</h2>
-<ul>
-  {% for pedido in pedidos %}
-    <li>
-      Pedido #{{ pedido.id }} - {{ pedido.cliente }}  
-      Valor total: R$ {{ pedido.valor_total }}  
-      <a href="{% url 'pedidos:detalhar' pedido.id %}">Detalhar</a> |
-      <a href="{% url 'pedidos:editar' pedido.id %}">Editar</a> |
-      <a href="{% url 'pedidos:deletar' pedido.id %}">Deletar</a>
-    </li>
-  {% empty %}
-    <li>Nenhum pedido cadastrado.</li>
-  {% endfor %}
-</ul>
-<a href="{% url 'pedidos:criar' %}">Criar novo pedido</a>
+{% extends 'base.html' %}
+{%load static%}
+{%block content%}
+
+<h1>Pedidos</h1>
+<div style="text-align: right; margin: 0 20px 15px 0;">
+        <a class="btn btn-success" href="{% url 'pedidos:criar' %}" role="button">
+            + Nova Pedido
+        </a>
+    </div>
+<div class="card">
+    <div class="card-body">
+        <table>
+            <tr><th>Nº</th><th>Cliente</th><th>Valor Total</th><th>Ações</th></tr>
+                {% for pedido in pedidos %}
+            <tr>
+                <td>{{ pedido.id }}</td>
+                <td>{{ pedido.cliente|default:"-" }}</td>
+                <td>R${{ pedido.valor_total }}</td>
+                <td>
+                  <a class="btn btn-primary" href="{% url 'pedidos:detalhar' pedido.id %}" role="button">Ver</a>
+                  <a class="btn btn-warning" href="{% url 'pedidos:editar' pedido.id %}" role="button">Editar</a>
+                  <a class="btn btn-danger" href="{% url 'pedidos:deletar' pedido.id %}" role="button">Excluir</a>
+                </td>
+                {% empty %}
+                <td>Nenhum pedido cadastrado.</td>
+            </tr>
+                {% endfor %}
+        </table>
+    </div>
+</div>
+{%endblock%}
+
+
+
+

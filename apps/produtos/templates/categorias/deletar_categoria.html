@@ -1,8 +1,13 @@
-<h2>Excluir Categoria</h2>
+{% extends 'base.html' %}
+{%load static%}
+{%block content%}
+<h1>Excluir Categoria</h1>
 <p>Tem certeza que deseja excluir "{{ categoria.nome_categoria }}"?</p>
 <p>Produtos afetados: {{ categoria.produtos.count }}</p>
 <form method="post">
     {% csrf_token %}
-    <button type="submit">Sim, excluir</button>
+    <button class="btn btn-danger" type="submit">Sim, excluir</button>
+    <a class="btn btn-secondary" href="{% url 'categoria:listar' %}">Cancelar</a>
 </form>
-<a href="{% url 'categoria:listar' %}">Cancelar</a>
+
+{%endblock%}

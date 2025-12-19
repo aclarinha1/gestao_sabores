@@ -1,29 +1,32 @@
-<!-- versão mais simples -->
-<h2>Editar Pedido #{{ pedido.id }}</h2>
+{% extends 'base.html' %}
+{%load static%}
+{%block content%}
+<main>
+    <h1>Editar Pedido #{{ pedido.id }}</h1>
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    
-    <h3>Itens do Pedido</h3>
-    {{ formset.management_form }}
-    
-    <table>
-        {% for form_item in formset %}
-            <tr>
-                <td>{{ form_item.id }}</td>
-                <td>{{ form_item.produto }}</td>
-                <td>{{ form_item.quantidade }}</td>
-                <td>
-                    {% if form_item.instance.pk %}
-                        {{ form_item.DELETE }} Remover
-                    {% endif %}
-                </td>
-            </tr>
-        {% endfor %}
-    </table>
-    
-    <!-- O Django já renderizou 1 form extra (extra=1) para novos itens -->
-    
-    <button type="submit">Atualizar</button>
-</form>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        
+        <h3>Itens do Pedido</h3>
+        {{ formset.management_form }}
+        
+        <table>
+            {% for form_item in formset %}
+                <tr>
+                    <td>{{ form_item.id }}</td>
+                    <td>{{ form_item.produto }}</td>
+                    <td>{{ form_item.quantidade }}</td>
+                    <td>
+                        {% if form_item.instance.pk %}
+                            {{ form_item.DELETE }} Remover
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+
+        <button type="submit" class="btn btn-primary">💾 Atualizar Categoria</button>
+    </form>
+</main>
+{%endblock%}

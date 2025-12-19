@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
+from django.utils import timezone
 from .models import Pedido, ItemPedido, Produto
 from .forms import PedidoForm, ItemPedidoForm, ItemPedidoFormSetCreate, ItemPedidoFormSetEdit
 
@@ -10,7 +11,7 @@ def listar_pedidos(request):
 def detalhar_pedido(request, pk):
     pedido = get_object_or_404(Pedido, pk=pk)
     itens = pedido.itens.all()
-    return render(request, 'pedidos/detalhar_pedido.html', {'pedido': pedido, 'itens': itens})
+    return render(request, 'pedidos/detalhar_pedido.html', {'pedido': pedido, 'itens': itens, 'now': timezone.now()})
 
 def criar_pedido(request):
     if request.method == 'POST':

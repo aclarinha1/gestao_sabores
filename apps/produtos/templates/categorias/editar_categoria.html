@@ -1,135 +1,50 @@
-<!-- categorias/editar_categoria.html -->
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Editar Categoria</title>
-    <style>
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            padding: 20px; 
-            background-color: #f8f9fa;
-        }
-        .form-container { 
-            max-width: 600px; 
-            margin: 0 auto;
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        .form-group { 
-            margin-bottom: 20px; 
-        }
-        label { 
-            display: block; 
-            margin-bottom: 8px; 
-            font-weight: bold;
-            color: #495057;
-        }
-        input, textarea { 
-            width: 100%; 
-            padding: 10px; 
-            border: 1px solid #ced4da;
-            border-radius: 5px;
-            font-size: 16px;
-            box-sizing: border-box;
-        }
-        textarea {
-            min-height: 100px;
-            resize: vertical;
-        }
-        .btn { 
-            padding: 10px 20px; 
-            border: none; 
-            cursor: pointer; 
-            border-radius: 5px;
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-block;
-            margin-right: 10px;
-            transition: all 0.3s ease;
-        }
-        .btn-primary { 
-            background: #007bff; 
-            color: white; 
-        }
-        .btn-primary:hover {
-            background: #0069d9;
-        }
-        .btn-secondary { 
-            background: #6c757d; 
-            color: white; 
-        }
-        .btn-secondary:hover {
-            background: #5a6268;
-        }
-        h1 {
-            color: #343a40;
-            border-bottom: 2px solid #e9ecef;
-            padding-bottom: 15px;
-            margin-bottom: 25px;
-        }
-        .form-actions {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #e9ecef;
-        }
-        .warning-note {
-            background: #fff3cd;
-            border: 1px solid #ffeaa7;
-            color: #856404;
-            padding: 15px;
-            border-radius: 5px;
-            margin: 20px 0;
-        }
-    </style>
-</head>
-<body>
-    <div class="form-container">
-        <h1>✏️ Editar Categoria: {{ form.instance.nome_categoria }}</h1>
-        
-        {% if form.instance.produtos.count > 0 %}
+{% extends 'base.html' %}
+{%load static%}
+{%block content%}
+
+<h1>✏️Editar Categoria: {{ form.instance.nome_categoria }}</h1>
+{% if form.instance.produtos.count > 0 %}
             <div class="warning-note">
                 ⚠️ <strong>Atenção:</strong> Esta categoria contém {{ form.instance.produtos.count }} produto(s). 
                 A alteração do nome afetará todos os produtos vinculados.
             </div>
         {% endif %}
-        
-        <form method="post">
-            {% csrf_token %}
+    <div class="form-container">
+            <form method="post">
+                {% csrf_token %}
+                
+                <div class="form-group">
+                    <label for="id_nome_categoria"><strong>Nome da Categoria:</strong></label>
+                    {{ form.nome_categoria }}
+                </div>
+                
+                <div class="form-group">
+                    <label for="id_descricao"><strong>Descrição:</strong></label>
+                    {{ form.descricao }}
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">💾 Atualizar Categoria</button>
+                    <a href="{% url 'categoria:detalhar' form.instance.pk %}" class="btn btn-secondary">↩️ Cancelar</a>
+                    <a href="{% url 'categoria:deletar' form.instance.pk %}" class="btn btn-danger">🗑️ Excluir</a>
+                </div>
+            </form>
             
-            <div class="form-group">
-                <label for="id_nome_categoria">Nome da Categoria:</label>
-                {{ form.nome_categoria }}
-            </div>
-            
-            <div class="form-group">
-                <label for="id_descricao">Descrição:</label>
-                {{ form.descricao }}
-            </div>
-            
-            <div class="form-actions">
-                <button type="submit" class="btn btn-primary">💾 Atualizar Categoria</button>
-                <a href="{% url 'categoria:detalhar' form.instance.pk %}" class="btn btn-secondary">↩️ Cancelar</a>
-                <a href="{% url 'categoria:deletar' form.instance.pk %}" class="btn btn-danger">🗑️ Excluir</a>
-            </div>
-        </form>
-        
-        {% if form.instance.produtos.count > 0 %}
-            <div style="margin-top: 30px;">
-                <h3>📦 Produtos Vinculados ({{ form.instance.produtos.count }}):</h3>
-                <ul>
-                    {% for produto in form.instance.produtos.all|slice:":5" %}
-                        <li>
-                            <a href="{% url 'produtos:detalhar' produto.pk %}">{{ produto.nome_produto }}</a> - R$ {{ produto.preco_unitario }}
-                        </li>
-                    {% endfor %}
-                    {% if form.instance.produtos.count > 5 %}
-                        <li><em>... e mais {{ form.instance.produtos.count|add:"-5" }} produtos</em></li>
-                    {% endif %}
-                </ul>
-            </div>
-        {% endif %}
+            {% if form.instance.produtos.count > 0 %}
+                <div style="margin-top: 30px;">
+                    <h3>📦 Produtos Vinculados ({{ form.instance.produtos.count }}):</h3>
+                    <ul>
+                        {% for produto in form.instance.produtos.all|slice:":5" %}
+                            <li>
+                                <a href="{% url 'produtos:detalhar' produto.pk %}">{{ produto.nome_produto }}</a> - R$ {{ produto.preco_unitario }}
+                            </li>
+                        {% endfor %}
+                        {% if form.instance.produtos.count > 5 %}
+                            <li><em>... e mais {{ form.instance.produtos.count|add:"-5" }} produtos</em></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            {% endif %}
     </div>
-</body>
-</html>
+
+{%endblock%}

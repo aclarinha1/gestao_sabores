@@ -1,5 +1,11 @@
-<h2>{{ produto.nome_produto }}</h2>
-<p>Preço: R$ {{ produto.preco_unitario }}</p>
-<p>Categoria: {{ produto.categoria.nome_categoria }}</p>
-<a href="{% url 'produtos:editar' produto.id %}">Editar</a>
-<a href="{% url 'produtos:listar' %}">Voltar</a>
+{% extends 'base.html' %}
+{%load static%}
+{%block content%}
+    <h1>Detalhes do produto</h1>
+    <h2>Nome: {{ produto.nome_produto }}</h2>
+    <p>Preço: R$ {{ produto.preco_unitario }}</p>
+    <p>Categoria: {{ produto.categoria.nome_categoria }}</p>
+    <a class="btn btn-warning" href="{% url 'produtos:editar' produto.id %}" role="button">Editar</a>
+    <a class="btn btn-danger" href="{% url 'produtos:deletar' produto.id %}" role="button">Excluir</a>
+    <a class="btn btn-secondary" href="{% url 'produtos:listar' %}" role="button">Voltar</a>
+{%endblock%}
