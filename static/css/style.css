@@ -139,7 +139,6 @@ main{
 .container-pai{
     display: flex;
     justify-content: center;
-    align-items: center; 
     gap: 50px;
     flex-wrap: wrap;
     width: 100%;
@@ -148,7 +147,7 @@ main{
     
 }
 
-.bloco1, .bloco2{
+.bloco, .bloco1, .bloco2{
     flex: 1 0 auto;
     min-width: 200px;
     max-width: calc(25% - 20px);
